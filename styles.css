@@ -2,7 +2,10 @@
     --bg: #ffffff;
     --text: #171717;
     --subtle: #666666;
-    --accent: #16a34a;
+    --accent: #4b5563; /* Gray color for links */
+    --accent-deep: #1f2937; /* Deeper, richer gray color for project titles */
+    --highlight: #1f2937; /* Much darker gray for focus - was #e5e7eb */
+    --highlight-text: #f3f4f6;
     --surface: #f3f4f6;
     --border: #e5e7eb;
 }
@@ -12,7 +15,10 @@
         --bg: #171717;
         --text: #f3f4f6;
         --subtle: #9ca3af;
-        --accent: #22c55e;
+        --accent: #9ca3af; /* Gray color for links */
+        --accent-deep: #d1d5db; /* Deeper, richer gray color for project titles */
+        --highlight: #111827; /* Even darker for dark mode - was #374151 */
+        --highlight-text: #f9fafb;
         --surface: #1f2937;
         --border: #374151;
     }
@@ -96,7 +102,7 @@ main {
 
 .project-built-with {
     font-size: 0.875rem;
-    color: var(--subtle);
+    color: var (--subtle);
     margin-top: 2rem;
     padding-top: 1rem;
     border-top: 1px solid var(--border);
@@ -107,6 +113,7 @@ main {
     margin: 0;
     font-weight: 600;
     letter-spacing: -0.01em;
+    color: var(--accent-deep); /* Use the deeper, richer gray color */
 }
 
 .project-tagline {
@@ -149,11 +156,20 @@ main {
     text-decoration: none;
     font-size: 0.9375rem;
     font-weight: 500;
+    padding: 0.25rem 0.5rem; /* Move padding to default state */
+    margin: -0.25rem -0.5rem; /* Negative margin to compensate */
+    border-radius: 0.5rem;
 }
 
 .project-links a:focus {
-    outline: 2px solid var(--accent);
-    outline-offset: 4px;
+    outline: none;
+    background: var(--highlight); /* Inverted gray background for focus */
+    color: var(--highlight-text); /* Gray color for text on focus */
+    border-radius: 0.5rem; /* Same border radius as the card */
+    outline: none;
+    background: var(--highlight);
+    color: var(--highlight-text);
+    /* padding: 0.25rem 0.5rem; */
 }
 
 @media (prefers-reduced-motion: reduce) {
