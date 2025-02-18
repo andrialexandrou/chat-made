@@ -199,7 +199,6 @@ main {
   border-radius: 0.5rem;
   box-shadow: none; /* Remove box shadow */
   opacity: 0.8;
-  transition: opacity 0.2s ease;
 }
 
 .view-toggle {
@@ -284,16 +283,5 @@ main {
   .projects.grid-view {
       display: flex; /* Switch to flex layout */
       flex-direction: column; /* Column view */
-  }
-}
-
-/* Animation for view transitions */
-.projects {
-  transition: all 0.3s ease-out;
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .projects {
-      transition: none;
   }
 }
