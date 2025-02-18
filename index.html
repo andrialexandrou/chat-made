@@ -4,346 +4,113 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="Portfolio of digital products and software projects">
-    <title>Portfolio | Digital Products</title>
-    <style>
-        /* Base styles */
-        :root {
-            --bg: #fdf4ff;
-            --text: #1d1021;
-            --subtle: #64466f;
-            --accent: #c026d3;
-            --surface: #ffffff;
-            --border: #f3e8ff;
-            --focus-outline: #9333ea;
-        }
-
-        @media (prefers-color-scheme: dark) {
-            :root {
-                --bg: #1a0f1f;
-                --text: #fdf4ff;
-                --subtle: #d8b4fe;
-                --surface: #2d1535;
-                --border: #4c1d95;
-                --focus-outline: #c084fc;
-            }
-        }
-
-        /* Skip link - hidden by default, visible on focus */
-        .skip-link {
-            position: absolute;
-            top: -40px;
-            left: 0;
-            background: var(--accent);
-            color: white;
-            padding: 8px;
-            z-index: 100;
-            transition: top 0.2s ease;
-        }
-
-        .skip-link:focus {
-            top: 0;
-        }
-
-        body {
-            font-family: -apple-system, BlinkMacSystemFont, sans-serif;
-            line-height: 1.65;
-            margin: 0;
-            background: var(--bg);
-            color: var(--text);
-        }
-
-        /* Header styles */
-        header {
-            padding: 8rem 2rem 6rem;
-            max-width: 60ch;
-            margin: 0 auto;
-        }
-
-        header h1 {
-            font-size: clamp(2rem, 5vw, 3rem);
-            margin: 0;
-            font-weight: 600;
-            line-height: 1.2;
-            letter-spacing: -0.02em;
-        }
-
-        header p {
-            color: var(--subtle);
-            font-size: 1.25rem;
-            margin: 1.5rem 0 0;
-            line-height: 1.5;
-        }
-
-        /* Main content */
-        main {
-            padding: 2rem;
-            margin: 0 auto;
-        }
-
-        @media (min-width: 768px) {
-            main {
-                padding: 4rem;
-                max-width: 800px;
-            }
-        }
-
-        .projects {
-            display: flex;
-            flex-direction: column;
-            gap: 6rem;
-        }
-
-        /* Project card */
-        .project {
-            padding: 2.5rem;
-            display: flex;
-            flex-direction: column;
-            gap: 2rem;
-            background: var(--surface);
-            border: 1px solid var(--border);
-            border-radius: 1.5rem;
-        }
-
-        .project-header {
-            display: flex;
-            flex-direction: column;
-            gap: 0.75rem;
-        }
-
-        .project-date {
-            order: -1;
-            font-size: 0.875rem;
-            color: var(--subtle);
-            font-feature-settings: "tnum";
-            font-variant-numeric: tabular-nums;
-            margin-bottom: 0.5rem;
-        }
-
-        .project-title {
-            font-size: 1.75rem;
-            margin: 0;
-            font-weight: 600;
-            letter-spacing: -0.01em;
-        }
-
-        .project-tagline {
-            font-size: 1.125rem;
-            color: var(--subtle);
-            margin: 0;
-            line-height: 1.5;
-        }
-
-        .project-media {
-            border-radius: 1rem;
-            overflow: hidden;
-            background: var(--border);
-            aspect-ratio: 16/10;
-        }
-
-        .project-media img,
-        .project-media video {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
-
-        .project-description {
-            font-size: 1rem;
-            margin: 0;
-            color: var(--subtle);
-            line-height: 1.75;
-        }
-
-        .project-links {
-            display: flex;
-            gap: 1.5rem;
-            margin-top: auto;
-            padding-top: 1rem;
-        }
-
-        .project-links a {
-            color: var(--text);
-            text-decoration: none;
-            font-size: 0.9375rem;
-            padding: 0.5rem 0;
-            position: relative;
-        }
-
-        .project-links a::after {
-            content: "";
-            position: absolute;
-            left: 0;
-            bottom: 0;
-            width: 100%;
-            height: 2px;
-            background: var(--accent);
-            transform: scaleX(0);
-            transform-origin: right;
-            transition: transform 0.3s ease;
-        }
-
-        .project-links a:hover::after,
-        .project-links a:focus::after {
-            transform: scaleX(1);
-            transform-origin: left;
-        }
-
-        /* Transitions */
-        .project {
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-        }
-
-        .project:hover {
-            transform: translateY(-4px);
-            box-shadow: 0 12px 32px -8px rgba(0, 0, 0, 0.12);
-        }
-
-        /* Accessibility focus styles */
-        .project:focus-within {
-            outline: 3px solid var(--focus-outline);
-            outline-offset: 4px;
-        }
-
-        .project-links a:focus {
-            outline: 2px solid var(--focus-outline);
-            outline-offset: 4px;
-        }
-
-        @media (prefers-reduced-motion: reduce) {
-            .project,
-            .project-links a::after,
-            .skip-link {
-                transition: none;
-            }
-        }
-    </style>
+    <title>Chat Made, by andrialexandrou</title>
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <a href="#main" class="skip-link">Skip to main content</a>
-    
     <header role="banner">
-        <h1>Hello! I design and build digital products</h1>
-        <p>Focused on creating thoughtful experiences that help people work and live better</p>
+        <h1>Chat, I have an idea</h1>
+        <p>An index of projects that were primarily made by LLMs, with the objective of minimally modifying generated code.</p>
     </header>
 
     <main id="main" role="main">
         <div class="projects">
             <!-- Project 1 -->
-            <article class="project" itemscope itemtype="http://schema.org/SoftwareApplication">
+            <article class="project">
                 <div class="project-header">
-                    <time class="project-date" datetime="2024-01" itemprop="datePublished">January 2024</time>
-                    <h2 class="project-title" itemprop="name">Weather</h2>
-                    <p class="project-tagline" itemprop="description">A mindful approach to weather forecasting</p>
+                    <div class="project-meta">
+                        <time class="project-date" datetime="2024-01">January 2024</time>
+                    </div>
+                    <h2 class="project-title">Weather</h2>
+                    <p class="project-tagline">A mindful approach to weather forecasting</p>
                 </div>
                 <div class="project-media">
                     <img src="/api/placeholder/800/500" 
-                         alt="Weather interface showing current conditions with a clean, minimal design"
-                         itemprop="image">
+                         alt="Weather interface showing current conditions with a clean, minimal design">
                 </div>
-                <p class="project-description" itemprop="description">
+                <p class="project-description">
                     A weather app that focuses on the essentials. Built with React 
                     and designed to be both beautiful and functional, helping you 
                     plan your day with clarity.
                 </p>
                 <div class="project-links">
-                    <a href="#demo" aria-label="View Weather app demo">View Demo</a>
-                    <a href="#github" aria-label="View Weather app source code on GitHub">Source Code</a>
-                    <a href="#live" aria-label="Visit Weather app live site">Live Site</a>
+                    <a href="#demo">View Demo</a>
+                    <a href="#github">Source Code</a>
+                    <a href="#live">Live Site</a>
+                </div>
+                <div class="project-built-with">
+                    Built with Claude
                 </div>
             </article>
 
             <!-- Project 2 -->
-            <article class="project" itemscope itemtype="http://schema.org/SoftwareApplication">
+            <article class="project">
                 <div class="project-header">
-                    <time class="project-date" datetime="2023-11" itemprop="datePublished">November 2023</time>
-                    <h2 class="project-title" itemprop="name">TaskCLI</h2>
-                    <p class="project-tagline" itemprop="description">Simple task management for developers</p>
+                    <div class="project-meta">
+                        <time class="project-date" datetime="2023-11">November 2023</time>
+                        <div class="project-tech">
+                            <span class="tech-item">Node.js</span>
+                            <span class="tech-item">SQLite</span>
+                            <span class="tech-item">Commander.js</span>
+                        </div>
+                    </div>
+                    <h2 class="project-title">TaskCLI</h2>
+                    <p class="project-tagline">Simple task management for developers</p>
                 </div>
                 <div class="project-media">
-                    <video controls aria-label="Demo video of TaskCLI application">
+                    <video controls>
                         <source src="#" type="video/mp4">
                         Your browser does not support the video tag.
                     </video>
                 </div>
-                <p class="project-description" itemprop="description">
+                <p class="project-description">
                     A thoughtfully designed CLI task manager that fits naturally into 
                     developer workflows. Built with Node.js and SQLite, featuring 
                     seamless Git integration.
                 </p>
                 <div class="project-links">
-                    <a href="#github" aria-label="View TaskCLI source code on GitHub">View Project</a>
-                    <a href="#docs" aria-label="Read TaskCLI documentation">Documentation</a>
+                    <a href="#github">View Project</a>
+                    <a href="#docs">Documentation</a>
+                </div>
+                <div class="project-built-with">
+                    Built with ChatGPT
                 </div>
             </article>
 
             <!-- Project 3 -->
-            <article class="project" itemscope itemtype="http://schema.org/SoftwareApplication">
+            <article class="project">
                 <div class="project-header">
-                    <time class="project-date" datetime="2023-09" itemprop="datePublished">September 2023</time>
-                    <h2 class="project-title" itemprop="name">Compose</h2>
-                    <p class="project-tagline" itemprop="description">A peaceful space for writing</p>
+                    <div class="project-meta">
+                        <time class="project-date" datetime="2023-09">September 2023</time>
+                        <div class="project-tech">
+                            <span class="tech-item">JavaScript</span>
+                            <span class="tech-item">marked</span>
+                            <span class="tech-item">LocalStorage</span>
+                        </div>
+                    </div>
+                    <h2 class="project-title">Compose</h2>
+                    <p class="project-tagline">A peaceful space for writing</p>
                 </div>
                 <div class="project-media">
                     <img src="/api/placeholder/800/500" 
-                         alt="Clean writing interface with markdown preview"
-                         itemprop="image">
+                         alt="Clean writing interface with markdown preview">
                 </div>
-                <p class="project-description" itemprop="description">
+                <p class="project-description">
                     A focused markdown editor that helps you concentrate on your 
                     thoughts. Features real-time preview and automatic saving, 
                     built with modern web technologies.
                 </p>
                 <div class="project-links">
-                    <a href="#github" aria-label="View Compose editor source code on GitHub">View Project</a>
-                    <a href="#live" aria-label="Try Compose editor live demo">Try It Out</a>
+                    <a href="#github">View Project</a>
+                    <a href="#live">Try It Out</a>
+                </div>
+                <div class="project-built-with">
+                    Built with Claude
                 </div>
             </article>
 
-            <!-- Project 4 -->
-            <article class="project" itemscope itemtype="http://schema.org/SoftwareApplication">
-                <div class="project-header">
-                    <time class="project-date" datetime="2023-07" itemprop="datePublished">July 2023</time>
-                    <h2 class="project-title" itemprop="name">Finance</h2>
-                    <p class="project-tagline" itemprop="description">Mindful money management</p>
-                </div>
-                <div class="project-media">
-                    <img src="/api/placeholder/800/500" 
-                         alt="Finance dashboard showing spending insights and charts"
-                         itemprop="image">
-                </div>
-                <p class="project-description" itemprop="description">
-                    A gentle approach to personal finance tracking, with intuitive 
-                    visualizations and helpful insights. Built with React and D3.js, 
-                    focused on privacy and ease of use.
-                </p>
-                <div class="project-links">
-                    <a href="#github" aria-label="View Finance app source code on GitHub">View Project</a>
-                    <a href="#live" aria-label="Try Finance app live demo">Live Demo</a>
-                </div>
-            </article>
-
-            <!-- Project 5 -->
-            <article class="project" itemscope itemtype="http://schema.org/SoftwareApplication">
-                <div class="project-header">
-                    <time class="project-date" datetime="2023-05" itemprop="datePublished">May 2023</time>
-                    <h2 class="project-title" itemprop="name">CodeShare</h2>
-                    <p class="project-tagline" itemprop="description">Share code snippets beautifully</p>
-                </div>
-                <div class="project-media">
-                    <img src="/api/placeholder/800/500" 
-                         alt="Code sharing interface with syntax highlighting"
-                         itemprop="image">
-                </div>
-                <p class="project-description" itemprop="description">
-                    A fresh take on code sharing that makes your snippets look as 
-                    good as they work. Features syntax highlighting and easy 
-                    organization tools.
-                </p>
-                <div class="project-links">
-                    <a href="#demo" aria-label="Try CodeShare app demo">Live Demo</a>
-                    <a href="#github" aria-label="View CodeShare source code on GitHub">Source Code</a>
-                </div>
-            </article>
+            <!-- Additional projects follow the same pattern -->
+            
         </div>
     </main>
 </body>
