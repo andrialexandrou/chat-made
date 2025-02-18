@@ -178,12 +178,30 @@ document.addEventListener('DOMContentLoaded', () => {
     // Sort projects by date (newest first)
     projects.sort((a, b) => new Date(b.date) - new Date(a.date));
 
-    projects.forEach(project => {
+    projects.forEach((project, index) => {
         const projectCard = document.createElement('article');
         projectCard.className = 'project';
         projectCard.setAttribute('tabindex', '0');
+        projectCard.id = `project-${index}`; // Add ID for linking
+
+        const altTextButton = project.media.type === 'img' ? `
+            <button class="alt-text-button" aria-label="Show image description">ALT</button>
+            <dialog class="alt-text-dialog">
+                <div class="dialog-content">
+                    ${project.media.alt}
+                    <button class="dialog-close" aria-label="Close dialog">×</button>
+                </div>
+            </dialog>
+        ` : '';
 
         projectCard.innerHTML = `
+            <a href="#project-${index}" class="project-share" aria-label="Share link to project">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M4 12v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8"></path>
+                    <polyline points="16 6 12 2 8 6"></polyline>
+                    <line x1="12" y1="2" x2="12" y2="15"></line>
+                </svg>
+            </a>
             <div class="project-header">
                 <div class="project-meta">
                     <time class="project-date" datetime="${project.date}">${new Date(project.date).toLocaleString('default', { month: 'long', year: 'numeric' })}</time>
@@ -192,7 +210,10 @@ document.addEventListener('DOMContentLoaded', () => {
                 <p class="project-tagline">${project.tagline}</p>
             </div>
             <div class="project-media">
-                ${project.media.type === 'img' ? `<img src="${project.media.src}" alt="${project.media.alt}">` : `<video controls><source src="${project.media.src}" type="video/mp4">${project.media.alt}</video>`}
+                ${project.media.type === 'img' ? 
+                    `<img src="${project.media.src}" alt="${project.media.alt}">
+                     ${altTextButton}` : 
+                    `<video controls><source src="${project.media.src}" type="video/mp4">${project.media.alt}</video>`}
             </div>
             <p class="project-description">${project.description}</p>
             <div class="project-links">
@@ -202,6 +223,46 @@ document.addEventListener('DOMContentLoaded', () => {
                 Built with ${project.builtWith}
             </div>
         `;
+
+        // Add click handler for alt text button
+        if (project.media.type === 'img') {
+            const altButton = projectCard.querySelector('.alt-text-button');
+            const altDialog = projectCard.querySelector('.alt-text-dialog');
+            const closeButton = projectCard.querySelector('.dialog-close');
+            
+            altButton.addEventListener('click', () => {
+                altDialog.showModal();
+            });
+
+            // Close dialog and return focus
+            const closeDialog = () => {
+                altDialog.close();
+                altButton.focus();
+            };
+
+            // Close on button click
+            closeButton.addEventListener('click', closeDialog);
+
+            // Close on Escape key
+            altDialog.addEventListener('keydown', (e) => {
+                if (e.key === 'Escape') {
+                    closeDialog();
+                }
+            });
+
+            // Close on click outside
+            altDialog.addEventListener('click', (e) => {
+                const dialogDimensions = altDialog.getBoundingClientRect();
+                if (
+                    e.clientX < dialogDimensions.left ||
+                    e.clientX > dialogDimensions.right ||
+                    e.clientY < dialogDimensions.top ||
+                    e.clientY > dialogDimensions.bottom
+                ) {
+                    closeDialog();
+                }
+            });
+        }
 
         projectsContainer.appendChild(projectCard);
     });
