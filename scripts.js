@@ -5,9 +5,9 @@ document.addEventListener('DOMContentLoaded', () => {
         title: "Alfred Workflow - Image Description",
         tagline: "Generate image descriptions based on what's in your clipboard",
         media: {
-            type: "video",
+            type: "img",
             src: "#",
-            alt: "Demo video showing an Alfred workflow that generates image descriptions"
+            alt: "Screenshot showing an Alfred workflow that generates image descriptions"
         },
         description: "A workflow that will generate an image description based off of what's in my clipboard. Has a few hardcoded path values in the workflow configuration so it's not quite ready to share.",
         links: [
@@ -21,9 +21,9 @@ document.addEventListener('DOMContentLoaded', () => {
         title: "PR Accessibility Review",
         tagline: "A code review agent for accessibility feedback",
         media: {
-            type: "video",
+            type: "img",
             src: "#",
-            alt: "Demo video of a PR review environment for accessibility feedback"
+            alt: "Screenshot of a PR review environment for accessibility feedback"
         },
         description: "A naive PR review experience specifically geared toward providing a11y feedback. Built as a basic PR environment to explore whether we can use our own Knowledge Base to artificially contextualize the prompt.",
         links: [
