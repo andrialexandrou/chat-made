@@ -8,6 +8,11 @@
     --highlight-text: #f3f4f6;
     --surface: #f3f4f6;
     --border: #e5e7eb;
+    --grid-card-height: 300px;
+    --card-padding-regular: 2.5rem;
+    --card-padding-grid: 2rem;
+    --card-gap-regular: 2rem;
+    --card-gap-grid: 1rem;
 }
 
 @media (prefers-color-scheme: dark) {
@@ -173,10 +178,6 @@ main {
     background: var(--highlight); /* Inverted gray background for focus */
     color: var(--highlight-text); /* Gray color for text on focus */
     border-radius: 0.5rem; /* Same border radius as the card */
-    outline: none;
-    background: var(--highlight);
-    color: var(--highlight-text);
-    /* padding: 0.25rem 0.5rem; */
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -197,7 +198,6 @@ main {
   padding: 0.5rem;
   background: transparent; /* Transparent background */
   border-radius: 0.5rem;
-  box-shadow: none; /* Remove box shadow */
   opacity: 0.8;
 }
 
@@ -236,9 +236,9 @@ main {
 }
 
 .projects.grid-view .project {
-  padding: 2rem; /* Increased padding in grid mode */
-  gap: 1rem; /* Reduce space between elements */
-  height: 300px; /* Set a fixed height for all cards */
+  padding: var(--card-padding-grid);
+  gap: var(--card-gap-grid);
+  height: var(--grid-card-height);
 }
 
 .projects.grid-view .project-header {
