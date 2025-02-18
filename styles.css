@@ -8,7 +8,7 @@
     --highlight-text: #f3f4f6;
     --surface: #f3f4f6;
     --border: #e5e7eb;
-    --grid-card-height: 300px;
+    --grid-card-height: 250px;
     --card-padding-regular: 2.5rem;
     --card-padding-grid: 2rem;
     --card-gap-regular: 2rem;
@@ -38,15 +38,20 @@ body {
 }
 
 /* Header styles */
-header {
-    padding: 8rem 2rem 6rem;
-    max-width: calc(1000px - 2rem); /* Adjusted width to align with card text */
+.content-container {
+    max-width: 1000px;
     margin: 0 auto;
+    padding: 0 2rem;
+}
+
+header {
+    padding: 8rem 0 6rem;
     text-align: left; /* Left-align the heading */
+    padding-left: 40px;
 }
 
 header h1 {
-    font-size: clamp(2rem, 5vw, 3rem);
+    font-size: 3rem; /* Fixed size instead of clamp */
     margin: 0;
     font-weight: 600;
     line-height: 1.2;
@@ -62,13 +67,24 @@ header p {
 
 /* Main content */
 main {
-    padding: 2rem;
-    margin: 0 auto;
+    padding: 2rem 0;
+}
+
+@media (min-width: 768px) {
+    .content-container {
+        padding: 0 3rem;
+    }
+}
+
+@media (min-width: 1024px) {
+    .content-container {
+        padding: 0 4rem;
+    }
 }
 
 @media (min-width: 768px) {
     main {
-      padding: 3rem; /* Increased padding */
+      padding: 3rem 0; /* Increased padding */
       max-width: 1000px; /* Decreased overall width */
       margin: 0 auto; /* Increased from 800px to accommodate 3 columns */
     }
@@ -85,7 +101,7 @@ main {
     padding: 2.5rem;
     display: flex;
     flex-direction: column;
-    gap: 2rem;
+    gap: 1rem;
     background: var(--surface);
     border-radius: 1rem;
     box-shadow: rgba(0, 0, 0, 0.1) 0px 10px 15px -3px, 
@@ -115,7 +131,6 @@ main {
 .project-built-with {
     font-size: 0.875rem;
     color: var(--subtle); /* Dimmer color for "Built with" content */
-    margin-top: 2rem;
     padding-top: 1rem;
     border-top: 1px solid var(--border);
 }
@@ -275,7 +290,7 @@ main {
       grid-template-columns: repeat(3, 1fr); /* 3 columns on large screens */
   }
   main {
-    padding: 4rem;
+    padding: 4rem 0;
 }
 }
 
