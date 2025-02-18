@@ -178,11 +178,20 @@ document.addEventListener('DOMContentLoaded', () => {
     // Sort projects by date (newest first)
     projects.sort((a, b) => new Date(b.date) - new Date(a.date));
 
+    // Helper function to create URL-friendly slugs
+    const slugify = (text) => {
+        return text
+            .toLowerCase()
+            .replace(/[^a-z0-9]+/g, '-')
+            .replace(/(^-|-$)/g, '');
+    };
+
     projects.forEach((project, index) => {
         const projectCard = document.createElement('article');
         projectCard.className = 'project';
         projectCard.setAttribute('tabindex', '0');
-        projectCard.id = `project-${index}`; // Add ID for linking
+        const projectSlug = slugify(project.title);
+        projectCard.id = projectSlug;
 
         const altTextButton = project.media.type === 'img' ? `
             <button class="alt-text-button" aria-label="Show image description">ALT</button>
@@ -195,13 +204,6 @@ document.addEventListener('DOMContentLoaded', () => {
         ` : '';
 
         projectCard.innerHTML = `
-            <a href="#project-${index}" class="project-share" aria-label="Share link to project">
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                    <path d="M4 12v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8"></path>
-                    <polyline points="16 6 12 2 8 6"></polyline>
-                    <line x1="12" y1="2" x2="12" y2="15"></line>
-                </svg>
-            </a>
             <div class="project-header">
                 <div class="project-meta">
                     <time class="project-date" datetime="${project.date}">${new Date(project.date).toLocaleString('default', { month: 'long', year: 'numeric' })}</time>
@@ -218,6 +220,13 @@ document.addEventListener('DOMContentLoaded', () => {
             <p class="project-description">${project.description}</p>
             <div class="project-links">
                 ${project.links.map(link => `<a href="${link.href}">${link.text}</a>`).join('')}
+                <a href="#${projectSlug}" class="share-link" aria-label="Share link to ${project.title}">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M4 12v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8"></path>
+                        <polyline points="16 6 12 2 8 6"></polyline>
+                        <line x1="12" y1="2" x2="12" y2="15"></line>
+                    </svg>
+                </a>
             </div>
             <div class="project-built-with">
                 Built with ${project.builtWith}

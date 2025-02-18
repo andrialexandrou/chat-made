@@ -303,6 +303,26 @@ main {
   }
 }
 
+/* Remove old share styles */
+.project-share {
+    display: none;
+}
+
+/* Add new share link styles */
+.share-link {
+    color: var(--subtle);
+    display: flex;
+    align-items: center;
+}
+
+.share-link:hover {
+    color: var(--text);
+}
+
+.share-link svg {
+    margin-top: 1px;
+}
+
 .project-share {
     position: absolute;
     top: 1rem;
