@@ -35,8 +35,9 @@ body {
 /* Header styles */
 header {
     padding: 8rem 2rem 6rem;
-    max-width: 60ch;
+    max-width: calc(1000px - 2rem); /* Adjusted width to align with card text */
     margin: 0 auto;
+    text-align: left; /* Left-align the heading */
 }
 
 header h1 {
@@ -62,15 +63,16 @@ main {
 
 @media (min-width: 768px) {
     main {
-        padding: 4rem;
-        max-width: 800px;
+      padding: 3rem; /* Increased padding */
+      max-width: 1000px; /* Decreased overall width */
+      margin: 0 auto; /* Increased from 800px to accommodate 3 columns */
     }
 }
 
 .projects {
     display: flex;
     flex-direction: column;
-    gap: 6rem;
+    gap: 8rem; /* Increased height padding between cards */
 }
 
 /* Project card */
@@ -83,6 +85,11 @@ main {
     border-radius: 1rem;
     box-shadow: rgba(0, 0, 0, 0.1) 0px 10px 15px -3px, 
                rgba(0, 0, 0, 0.05) 0px 4px 6px -2px;
+    outline: none; /* Remove default outline */
+}
+
+.project:focus {
+    outline: 2px solid #4b5563; /* Dark gray outline on focus */
 }
 
 .project-header {
@@ -97,12 +104,12 @@ main {
 
 .project-date {
     font-size: 0.875rem;
-    color: var(--subtle);
+    color: var(--subtle); /* Dimmer color for date */
 }
 
 .project-built-with {
     font-size: 0.875rem;
-    color: var (--subtle);
+    color: var(--subtle); /* Dimmer color for "Built with" content */
     margin-top: 2rem;
     padding-top: 1rem;
     border-top: 1px solid var(--border);
@@ -118,7 +125,7 @@ main {
 
 .project-tagline {
     font-size: 1.125rem;
-    color: var(--subtle);
+    color: var(--text); /* Darker color for subtitle */
     margin: 0;
     line-height: 1.5;
 }
@@ -140,7 +147,7 @@ main {
 .project-description {
     font-size: 1rem;
     margin: 0;
-    color: var(--subtle);
+    color: var(--text); /* Darker color for description */
     line-height: 1.75;
 }
 
@@ -176,4 +183,117 @@ main {
     * {
         transition: none !important;
     }
+}
+
+/* View controls */
+.view-controls {
+  position: fixed;
+  top: 1rem;
+  left: 1rem;
+  z-index: 50;
+  display: flex;
+  flex-direction: column; /* Vertically oriented */
+  gap: 0.5rem;
+  padding: 0.5rem;
+  background: transparent; /* Transparent background */
+  border-radius: 0.5rem;
+  box-shadow: none; /* Remove box shadow */
+  opacity: 0.8;
+  transition: opacity 0.2s ease;
+}
+
+.view-toggle {
+  padding: 0.5rem;
+  border: none;
+  background: none;
+  border-radius: 0.25rem;
+  cursor: pointer;
+  color: var(--subtle); /* Use the subtle color instead of text color */
+}
+
+.view-toggle svg {
+  width: 20px;
+  height: 20px;
+  stroke-width: 1.5; /* Make the lines heavier */
+}
+
+.view-toggle:hover {
+  background: var(--surface);
+  color: var(--text);
+}
+
+.view-toggle.active {
+  background: var(--surface);
+  color: var(--text);
+  stroke-width: 4.5; /* Even heavier line for active state */
+}
+
+/* Grid view styles */
+.projects.grid-view {
+  display: grid;
+  grid-template-columns: 1fr; /* Default to single column on mobile */
+  gap: 1.5rem;
+  margin: 0 1rem; /* Adjusted margin for proper alignment */
+}
+
+.projects.grid-view .project {
+  padding: 2rem; /* Increased padding in grid mode */
+  gap: 1rem; /* Reduce space between elements */
+  height: 300px; /* Set a fixed height for all cards */
+}
+
+.projects.grid-view .project-header {
+  gap: 0.5rem;
+}
+
+.projects.grid-view .project-title {
+  font-size: 1.25rem; /* Smaller title in grid */
+}
+
+.projects.grid-view .project-tagline {
+  font-size: 1rem;
+  margin-bottom: 0.5rem;
+}
+
+.projects.grid-view .project-media,
+.projects.grid-view .project-description {
+  display: none; /* Remove image and description in grid view */
+}
+
+.projects.grid-view .project-links,
+.projects.grid-view .project-built-with {
+  display: none;
+}
+
+@media (min-width: 640px) {
+  .projects.grid-view {
+      grid-template-columns: repeat(2, 1fr); /* 2 columns on medium screens */
+  }
+}
+
+@media (min-width: 1024px) {
+  .projects.grid-view {
+      grid-template-columns: repeat(3, 1fr); /* 3 columns on large screens */
+  }
+  main {
+    padding: 4rem;
+}
+}
+
+@media (max-width: 639px) {
+  .projects.grid-view {
+      display: flex; /* Switch to flex layout */
+      flex-direction: column; /* Column view */
+  }
+}
+
+/* Animation for view transitions */
+.projects {
+  transition: all 0.3s ease-out;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .projects {
+      transition: none;
+  }
 }

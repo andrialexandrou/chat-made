@@ -1,4 +1,75 @@
 document.addEventListener('DOMContentLoaded', () => {
+  const projectsContainer = document.getElementById('projects');
+  const viewToggles = document.querySelectorAll('.view-toggle');
+  
+  // Handle view toggle
+  viewToggles.forEach(toggle => {
+      toggle.addEventListener('click', () => {
+          const view = toggle.dataset.view;
+          
+          // Update buttons state
+          viewToggles.forEach(btn => {
+              btn.classList.remove('active');
+              btn.setAttribute('aria-pressed', 'false');
+          });
+          toggle.classList.add('active');
+          toggle.setAttribute('aria-pressed', 'true');
+          
+          // Update view
+          if (view === 'grid') {
+              projectsContainer.classList.add('grid-view');
+          } else {
+              projectsContainer.classList.remove('grid-view');
+          }
+      });
+  });
+  
+  // Handle grid item click
+  projectsContainer.addEventListener('click', (e) => {
+      const projectCard = e.target.closest('.project');
+      if (projectCard && projectsContainer.classList.contains('grid-view')) {
+          // Switch to list view
+          projectsContainer.classList.remove('grid-view');
+          viewToggles.forEach(btn => {
+              if (btn.dataset.view === 'list') {
+                  btn.classList.add('active');
+                  btn.setAttribute('aria-pressed', 'true');
+              } else {
+                  btn.classList.remove('active');
+                  btn.setAttribute('aria-pressed', 'false');
+              }
+          });
+          
+          // Scroll to clicked project
+          projectCard.scrollIntoView({ behavior: 'smooth' });
+      }
+  });
+
+  // Handle keyboard focus and enter/space key press
+  projectsContainer.addEventListener('keydown', (e) => {
+      if ((e.key === 'Enter' || e.key === ' ') && projectsContainer.classList.contains('grid-view')) {
+          const projectCard = e.target.closest('.project');
+          if (projectCard) {
+              // Switch to list view
+              projectsContainer.classList.remove('grid-view');
+              viewToggles.forEach(btn => {
+                  if (btn.dataset.view === 'list') {
+                      btn.classList.add('active');
+                      btn.setAttribute('aria-pressed', 'true');
+                  } else {
+                      btn.classList.remove('active');
+                      btn.setAttribute('aria-pressed', 'false');
+                  }
+              });
+
+              // Scroll to focused project
+              projectCard.scrollIntoView({ behavior: 'smooth' });
+          }
+      }
+  });
+});
+
+document.addEventListener('DOMContentLoaded', () => {
   const projects = [
     {
         date: "2024-01",
@@ -124,6 +195,7 @@ document.addEventListener('DOMContentLoaded', () => {
     projects.forEach(project => {
         const projectCard = document.createElement('article');
         projectCard.className = 'project';
+        projectCard.setAttribute('tabindex', '0');
 
         projectCard.innerHTML = `
             <div class="project-header">
@@ -146,5 +218,37 @@ document.addEventListener('DOMContentLoaded', () => {
         `;
 
         projectsContainer.appendChild(projectCard);
+    });
+});
+
+document.addEventListener('DOMContentLoaded', () => {
+    const viewToggleButtons = document.querySelectorAll('.view-toggle');
+    const projectsContainer = document.getElementById('projects');
+
+    viewToggleButtons.forEach(button => {
+        button.addEventListener('click', () => {
+            const view = button.getAttribute('data-view');
+            projectsContainer.className = `projects ${view}-view`;
+
+            // Update tab focus for all project cards
+            const projectCards = document.querySelectorAll('.project');
+            projectCards.forEach(card => {
+                card.setAttribute('tabindex', '0');
+            });
+
+            // Update button states
+            viewToggleButtons.forEach(btn => {
+                btn.classList.remove('active');
+                btn.setAttribute('aria-pressed', 'false');
+            });
+            button.classList.add('active');
+            button.setAttribute('aria-pressed', 'true');
+        });
+    });
+
+    // Initial tab focus setup for all project cards
+    const projectCards = document.querySelectorAll('.project');
+    projectCards.forEach(card => {
+        card.setAttribute('tabindex', '0');
     });
 });

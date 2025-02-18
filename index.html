@@ -8,9 +8,35 @@
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
+    <div class="view-controls" role="toolbar" aria-label="View options">
+        <button 
+            class="view-toggle active" 
+            data-view="list" 
+            aria-label="List view"
+            aria-pressed="true">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <line x1="3" y1="12" x2="21" y2="12"></line>
+                <line x1="3" y1="6" x2="21" y2="6"></line>
+                <line x1="3" y1="18" x2="21" y2="18"></line>
+            </svg>
+        </button>
+        <button 
+            class="view-toggle" 
+            data-view="grid" 
+            aria-label="Grid view"
+            aria-pressed="false">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <rect x="3" y="3" width="7" height="7"></rect>
+                <rect x="14" y="3" width="7" height="7"></rect>
+                <rect x="14" y="14" width="7" height="7"></rect>
+                <rect x="3" y="14" width="7" height="7"></rect>
+            </svg>
+        </button>
+    </div>
+
     <header role="banner">
         <h1>Chat, I have an idea</h1>
-        <p>These projects were primarily made by LLMs. Engines are listed on a project-by-project basis.</p>
+        <p>These projects were primarily made by LLMs. Models are listed on a project-by-project basis.</p>
     </header>
 
     <main id="main" role="main">
