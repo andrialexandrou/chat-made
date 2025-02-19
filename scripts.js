@@ -209,8 +209,10 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     ];
 
-    // Sort projects by date (newest first)
-    projects.sort((a, b) => new Date(b.date) - new Date(a.date));
+    // Sort projects by date (newest first), excluding drafts
+    const publishedProjects = projects
+        .filter(project => project.status !== 'draft')
+        .sort((a, b) => new Date(b.date) - new Date(a.date));
 
     // Helper function to create URL-friendly slugs
     const slugify = (text) => {
@@ -220,7 +222,7 @@ document.addEventListener('DOMContentLoaded', () => {
             .replace(/(^-|-$)/g, '');
     };
 
-    projects.forEach((project, index) => {
+    publishedProjects.forEach((project, index) => {
         const projectCard = document.createElement('article');
         projectCard.className = 'project';
         projectCard.setAttribute('tabindex', '0');
