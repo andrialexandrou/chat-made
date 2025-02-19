@@ -173,6 +173,16 @@ main {
     line-height: 1.75;
 }
 
+.project-description-container {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.project-description-container p {
+    margin: 0;
+}
+
 .project-links {
     display: flex;
     gap: 1.5rem;
@@ -256,6 +266,7 @@ main {
   padding: var(--card-padding-grid);
   gap: var(--card-gap-grid);
   height: var(--grid-card-height);
+  overflow: hidden; /* Prevent content overflow */
 }
 
 .projects.grid-view .project-header {
@@ -279,6 +290,13 @@ main {
 .projects.grid-view .project-links,
 .projects.grid-view .project-built-with {
   display: none;
+}
+
+.projects.grid-view .project-description-container {
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-line-clamp: 3; /* Show only 3 lines */
+  -webkit-box-orient: vertical;
 }
 
 @media (min-width: 640px) {
