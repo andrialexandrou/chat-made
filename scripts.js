@@ -110,7 +110,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 </li>
             </ol>
             <p>To accomplish these goals, I recommend that we incorporate developments in the AI field to provide a more focused and contextualized review experience, like RAG, and function calling, in order to compel the greatest value-add level of attention here.</p>
-            <p>A naive PR review experience specifically geared toward providing accessibility feedback. Built as a basic PR environment to explore whether we can use our own Knowledge Base to artificially contextualize the prompt.</p>`,
+            <p>The interface was also built specifically for testing this scenario.</p>`,
             links: [
                 { href: "https://github.slack.com/archives/C07RLM0F4CU/p1732300623913829?thread_ts=1732291204.092769&cid=C07RLM0F4CU", text: "Go to demo in Slack" },
                 { href: "https://github.com/andrialexandrou/a11y-code-review", text: "Go to repository" }
