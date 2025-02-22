@@ -58,7 +58,7 @@ document.addEventListener('DOMContentLoaded', () => {
             },
             description: "Simple portfolio site. Cute. Gets to the point.",
             links: [
-                { href: "https://github.com/andrialexandrou/chat-made", text: "Go to repository" }
+                { href: "https://github.com/andrialexandrou/chat-made", text: "Repository" }
             ],
             builtWith: "Claude and Copilot Edits"
         },
@@ -78,8 +78,8 @@ document.addEventListener('DOMContentLoaded', () => {
             <p>Taking my use case as a realistic representation of how someone might want to engage with AI-assisted image description, I created this workflow that not only creates the description, but supports customizing the prompt right from the execution of the workflow. If you install this you can also customize your system prompt to modify what I've spent a little prompt engineering time on myself.</p>
             <p>Most of all, this program calls attention to the fact that the image description is only the start of the task, and encourages modifying the resulting text to include context, or any other details that may be necessary. When used correctly, it helps with the blank page/writer's block problem. And with tens of images being required in our day-to-day, that makes a big difference.</p>`,
             links: [
-                { href: "https://github.slack.com/archives/C43EPAC4S/p1732135257591139?thread_ts=1732131808.319699&cid=C43EPAC4S", text: "Go to demo in Slack" },
-                { href: "https://github.com/andrialexandrou/ai-image-description", text: "Download workflow" }
+                { href: "https://github.slack.com/archives/C43EPAC4S/p1732135257591139?thread_ts=1732131808.319699&cid=C43EPAC4S", text: "Demo in Slack" },
+                { href: "https://github.com/andrialexandrou/ai-image-description", text: "Download" }
             ],
             builtWith: "Claude"
         },
@@ -112,8 +112,8 @@ document.addEventListener('DOMContentLoaded', () => {
             <p>To accomplish these goals, I recommend that we incorporate developments in the AI field to provide a more focused and contextualized review experience, like RAG, and function calling, in order to compel the greatest value-add level of attention here.</p>
             <p>The interface was also built specifically for testing this scenario.</p>`,
             links: [
-                { href: "https://github.slack.com/archives/C07RLM0F4CU/p1732300623913829?thread_ts=1732291204.092769&cid=C07RLM0F4CU", text: "Go to demo in Slack" },
-                { href: "https://github.com/andrialexandrou/a11y-code-review", text: "Go to repository" }
+                { href: "https://github.slack.com/archives/C07RLM0F4CU/p1732300623913829?thread_ts=1732291204.092769&cid=C07RLM0F4CU", text: "Demo in Slack" },
+                { href: "https://github.com/andrialexandrou/a11y-code-review", text: "Repository" }
             ],
             builtWith: "Claude"
         },
@@ -129,7 +129,7 @@ document.addEventListener('DOMContentLoaded', () => {
             },
             description: "A script to find all the PRs in a given subdirectory of any repository with automated alt text generation for images and videos.",
             links: [
-                { href: "https://gist.github.com/andrialexandrou/0e45af3fb75cc4ac284578694f4602f", text: "View Gist" }
+                { href: "https://gist.github.com/andrialexandrou/0e45af3fb75cc4ac284578694f4602f", text: "Gist" }
             ],
             builtWith: "Claude"
         },
@@ -172,7 +172,7 @@ document.addEventListener('DOMContentLoaded', () => {
             },
             description: "A writer friend of mine works for several hours a day across different stages of the process (prewriting, writing, editing). In order to track this she keeps a daily writing log both in a Google Sheet and in Obsidian. I wanted to see if I could automate some of that tedium for her. On form submit, this plugin will log the writing session to a Google Sheet and create a new note in Obsidian with the same information.",
             links: [
-                { href: "https://github.com/andrialexandrou/gus-the-writing-assistant", text: "Go to repository" }
+                { href: "https://github.com/andrialexandrou/gus-the-writing-assistant", text: "Repository" }
             ],
             builtWith: "Claude"
         },
@@ -187,7 +187,7 @@ document.addEventListener('DOMContentLoaded', () => {
             },
             description: "If given a spreadsheet with entries for wordcount completed on a given day, this script will output a table with the total wordcount for each day. It was created as a little script to accompany the Google sheet output from the Obsidian plugin, Gust the Writing Assistant.",
             links: [
-                { href: "https://gist.github.com/andrialexandrou/1ebdac3851a4ce662865b8942206cfe2", text: "Go to gist" }
+                { href: "https://gist.github.com/andrialexandrou/1ebdac3851a4ce662865b8942206cfe2", text: "Gist" }
             ],
             builtWith: "Claude"
         },
@@ -202,8 +202,8 @@ document.addEventListener('DOMContentLoaded', () => {
             },
             description: `A friend of mine is learning about databases and SQL, and is using Magic the Gathering Commander decks to explore the concepts. He had come up with a database design and was on to the next phase of needing to insert hundreds of cards, and I thought There Must Be an Easier Way. This form takes some card name input, searches the Scryfall API, and autofills the form while letting the user modify. On "adding card", some SQL is generated, intentionally creating a copy-paste flow so that this interface has no backend service or need to connect to a database.`,
             links: [
-                { href: "https://andrialexandrou.github.io/commander-tracker/", text: "Go to site" },
-                { href: "https://github.com/andrialexandrou/commander-tracker", text: "Go to repository"}
+                { href: "https://andrialexandrou.github.io/commander-tracker/", text: "Site" },
+                { href: "https://github.com/andrialexandrou/commander-tracker", text: "Repository"}
             ],
             builtWith: "Claude"
         }
@@ -240,36 +240,43 @@ document.addEventListener('DOMContentLoaded', () => {
         ` : '';
 
         projectCard.innerHTML = `
-            <div class="project-header">
-                <div class="project-meta">
-                    <time class="project-date" datetime="${project.date}">${new Date(project.date).toLocaleString('default', { month: 'long', year: 'numeric' })}</time>
-                </div>
-                <h2 class="project-title">${project.title}</h2>
-                <p class="project-tagline">${project.tagline}</p>
-            </div>
             <div class="project-media">
                 ${project.media.type === 'img' ? 
                     `<img src="${project.media.src}" alt="${project.media.alt}">
                      ${altTextButton}` : 
                     `<video controls><source src="${project.media.src}" type="video/mp4">${project.media.alt}</video>`}
             </div>
-            <div class="project-description-container">
-                ${project.description}
-            </div>
-            <div class="project-links">
-                ${project.links.map(link => `<a href="${link.href}">${link.text}</a>`).join('')}
-                <a href="#${projectSlug}" class="share-link" aria-label="Share link to ${project.title}">
-                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                        <path d="M4 12v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8"></path>
-                        <polyline points="16 6 12 2 8 6"></polyline>
-                        <line x1="12" y1="2" x2="12" y2="15"></line>
-                    </svg>
-                </a>
-            </div>
-            <div class="project-built-with">
-                Built with ${project.builtWith}
+            <div class="project-content">
+                <h2 class="project-title">${project.title}</h2>
+                <p class="project-tagline">${project.tagline}</p>
+                <div class="project-links">
+                    ${project.links.map(link => `<a href="${link.href}">${link.text}</a>`).join('')}
+                    <a href="#${projectSlug}" class="share-link" aria-label="Share link to ${project.title}">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M4 12v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8"></path>
+                            <polyline points="16 6 12 2 8 6"></polyline>
+                            <line x1="12" y1="2" x2="12" y2="15"></line>
+                        </svg>
+                    </a>
+                </div>
+                <div class="project-description">
+                    ${project.description}
+                </div>
             </div>
         `;
+
+        // Add copy button to code blocks
+        projectCard.querySelectorAll('pre code').forEach(block => {
+            const button = document.createElement('button');
+            button.className = 'copy-button';
+            button.textContent = 'Copy';
+            button.addEventListener('click', async () => {
+                await navigator.clipboard.writeText(block.textContent);
+                button.textContent = 'Copied!';
+                setTimeout(() => button.textContent = 'Copy', 2000);
+            });
+            block.parentNode.appendChild(button);
+        });
 
         // Add click handler for alt text button
         if (project.media.type === 'img') {

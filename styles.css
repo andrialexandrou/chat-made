@@ -6,13 +6,14 @@
     --accent-deep: #1f2937; /* Deeper, richer gray color for project titles */
     --highlight: #1f2937; /* Much darker gray for focus - was #e5e7eb */
     --highlight-text: #f3f4f6;
-    --surface: #f3f4f6;
+    --surface: #f3f4f6; /* Restore to gray */
     --border: #e5e7eb;
     --grid-card-height: 250px;
     --card-padding-regular: 2.5rem;
     --card-padding-grid: 2rem;
     --card-gap-regular: 2rem;
     --card-gap-grid: 1rem;
+    --two-char-width: 18px; /* Average width of 2 alphabet characters at 1rem */
 }
 
 @media (prefers-color-scheme: dark) {
@@ -24,7 +25,7 @@
         --accent-deep: #d1d5db; /* Deeper, richer gray color for project titles */
         --highlight: #111827; /* Even darker for dark mode - was #374151 */
         --highlight-text: #f9fafb;
-        --surface: #1f2937;
+        --surface: #1f2937; /* Restore to dark gray */
         --border: #374151;
     }
 }
@@ -93,25 +94,51 @@ main {
 .projects {
     display: flex;
     flex-direction: column;
-    gap: 8rem; /* Increased height padding between cards */
+    gap: 4rem;
+    margin: 0 auto;
+    max-width: 900px;
 }
 
 /* Project card */
 .project {
-    padding: 2.5rem;
-    display: flex;
-    flex-direction: column;
-    gap: 1rem;
-    background: var(--surface);
-    border-radius: 1rem;
-    box-shadow: rgba(0, 0, 0, 0.1) 0px 10px 15px -3px, 
-               rgba(0, 0, 0, 0.05) 0px 4px 6px -2px;
-    outline: none; /* Remove default outline */
+    display: grid;
+    grid-template-columns: 280px 1fr;
+    gap: 2rem;
+    padding: 1.5rem;
+    background: transparent;
+    border: none;
+    outline: none; /* Remove default focus outline */
     position: relative;
+    margin: -1.5rem;
+    border-radius: 8px;
+    min-height: 320px; /* Change fixed height to min-height */
+    height: auto; /* Allow content to determine height */
 }
 
-.project:focus {
-    outline: 2px solid #4b5563; /* Dark gray outline on focus */
+.project:hover,
+.project:focus,
+.project:focus-within {
+    background: rgba(250, 247, 231, 0.8); /* Soft yellow tint */
+    outline: 1px solid rgba(0, 0, 0, 0.05);
+    border-radius: 8px;
+    box-shadow: 0 2px 1px -1px rgba(0, 0, 0, 0.05);
+}
+
+/* Remove the bottom line since we're using shadow */
+.project:hover::after,
+.project:focus::after,
+.project:focus-within::after {
+    display: none;
+}
+
+@media (prefers-color-scheme: dark) {
+    .project:hover,
+    .project:focus,
+    .project:focus-within {
+        background: rgba(31, 29, 20, 0.8); /* Warm dark yellow */
+        outline: 1px solid rgba(255, 255, 255, 0.05);
+        box-shadow: 0 2px 1px -1px rgba(255, 255, 255, 0.05);
+    }
 }
 
 .project-header {
@@ -126,37 +153,65 @@ main {
 
 .project-date {
     font-size: 0.875rem;
-    color: var(--subtle); /* Dimmer color for date */
+    color: rgba(255, 255, 255, 0.7); /* Dimmer color for date */
 }
 
 .project-built-with {
     font-size: 0.875rem;
-    color: var(--subtle); /* Dimmer color for "Built with" content */
+    color: rgba(255, 255, 255, 0.7); /* Dimmer color for "Built with" content */
     padding-top: 1rem;
-    border-top: 1px solid var(--border);
+    border-top: 1px solid rgba(255, 255, 255, 0.2);
 }
 
 .project-title {
-    font-size: 1.75rem;
+    font-size: 1.75rem; /* 28px */
     margin: 0;
-    font-weight: 600;
+    font-weight: 700;
     letter-spacing: -0.01em;
-    color: var(--accent-deep); /* Use the deeper, richer gray color */
+    color: var(--accent-deep);
+    margin-bottom: 0.5rem; /* Reduced from 0.75rem */
 }
 
 .project-tagline {
-    font-size: 1.125rem;
-    color: var(--text); /* Darker color for subtitle */
+    font-size: 1.125rem; /* 18px */
+    color: var(--text);
+    opacity: 0.9;
     margin: 0;
     line-height: 1.5;
+    font-weight: 500;
+    margin-bottom: 0.75rem; /* Reduced from 1.25rem */
 }
 
 .project-media {
-    border-radius: 0.5rem;
+    padding-top: 0.75rem; /* Push image down to align with title */
+    aspect-ratio: 4/3; /* Change from 1/1 to 4/3 */
+    border-radius: 4px;
     overflow: hidden;
-    background: var(--border);
-    aspect-ratio: 16/10;
+    background: var(--surface);
     position: relative;
+}
+
+/* Remove media overlay effects */
+.project-media::after {
+    display: none;
+}
+
+/* Remove content transform/transition */
+.project-content {
+    color: var(--text);
+    padding: 0.5rem 0;
+}
+
+.project-title {
+    margin-bottom: 0.5rem;
+}
+
+.project-tagline {
+    margin-bottom: 0.5rem;
+}
+
+.project-links {
+    margin-bottom: 0.5rem;
 }
 
 .project-media img,
@@ -167,10 +222,17 @@ main {
 }
 
 .project-description {
-    font-size: 1rem;
+    font-size: 0.9375rem; /* 15px */
     margin: 0;
-    color: var(--text); /* Darker color for description */
-    line-height: 1.75;
+    color: var(--text);
+    opacity: 0.8;
+    line-height: 1.8;
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-line-clamp: 3; /* Reduced from 4 to ensure links are visible */
+    -webkit-box-orient: vertical;
+    margin-bottom: 0.5rem; /* Reduced from 1rem */
+    margin-top: 0.25rem;  /* Reduced from 0.5rem */
 }
 
 .project-description-container {
@@ -185,9 +247,10 @@ main {
 
 .project-links {
     display: flex;
-    gap: 1.5rem;
+    flex-wrap: wrap; /* Allow links to wrap */
+    gap: 1rem;
     margin-top: auto;
-    padding-top: 1rem;
+    padding: 0;
 }
 
 .project-links a {
@@ -195,16 +258,28 @@ main {
     text-decoration: none;
     font-size: 0.9375rem;
     font-weight: 500;
-    padding: 0.25rem 0.5rem; /* Move padding to default state */
-    margin: -0.25rem -0.5rem; /* Negative margin to compensate */
+    padding: 0.375rem 0.75rem;
     border-radius: 0.5rem;
+    background: var(--surface);
+    transition: background 0.2s ease;
 }
 
+.project-links a:hover,
 .project-links a:focus {
+    background: var(--border);
+    text-decoration: none;
     outline: none;
-    background: var(--highlight); /* Inverted gray background for focus */
-    color: var(--highlight-text); /* Gray color for text on focus */
-    border-radius: 0.5rem; /* Same border radius as the card */
+}
+
+@media (max-width: 768px) {
+    .project {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+    }
+
+    .project-media {
+        aspect-ratio: 16/9;
+    }
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -215,110 +290,13 @@ main {
 
 /* View controls */
 .view-controls {
-  position: fixed;
-  top: 1rem;
-  left: 1rem;
-  z-index: 50;
-  display: flex;
-  flex-direction: column; /* Vertically oriented */
-  gap: 0.5rem;
-  padding: 0.5rem;
-  background: transparent; /* Transparent background */
-  border-radius: 0.5rem;
-  opacity: 0.8;
+    display: none;
 }
 
-.view-toggle {
-  padding: 0.5rem;
-  border: none;
-  background: none;
-  border-radius: 0.25rem;
-  cursor: pointer;
-  color: var(--subtle); /* Use the subtle color instead of text color */
-}
-
-.view-toggle svg {
-  width: 20px;
-  height: 20px;
-  stroke-width: 1.5; /* Make the lines heavier */
-}
-
-.view-toggle:hover {
-  background: var(--surface);
-  color: var(--text);
-}
-
-.view-toggle.active {
-  background: var(--surface);
-  color: var(--text);
-  stroke-width: 4.5; /* Even heavier line for active state */
-}
-
-/* Grid view styles */
+/* Remove grid view styles since we're using a single layout */
 .projects.grid-view {
-  display: grid;
-  grid-template-columns: 1fr; /* Default to single column on mobile */
-  gap: 1.5rem;
-  margin: 0 1rem; /* Adjusted margin for proper alignment */
-}
-
-.projects.grid-view .project {
-  padding: var(--card-padding-grid);
-  gap: var(--card-gap-grid);
-  height: var(--grid-card-height);
-  overflow: hidden; /* Prevent content overflow */
-}
-
-.projects.grid-view .project-header {
-  gap: 0.5rem;
-}
-
-.projects.grid-view .project-title {
-  font-size: 1.25rem; /* Smaller title in grid */
-}
-
-.projects.grid-view .project-tagline {
-  font-size: 1rem;
-  margin-bottom: 0.5rem;
-}
-
-.projects.grid-view .project-media,
-.projects.grid-view .project-description {
-  display: none; /* Remove image and description in grid view */
-}
-
-.projects.grid-view .project-links,
-.projects.grid-view .project-built-with {
-  display: none;
-}
-
-.projects.grid-view .project-description-container {
-  overflow: hidden;
-  display: -webkit-box;
-  -webkit-line-clamp: 3; /* Show only 3 lines */
-  -webkit-box-orient: vertical;
-}
-
-@media (min-width: 640px) {
-  .projects.grid-view {
-      grid-template-columns: repeat(2, 1fr); /* 2 columns on medium screens */
-  }
-}
-
-@media (min-width: 1024px) {
-  .projects.grid-view {
-      grid-template-columns: repeat(3, 1fr); /* 3 columns on large screens */
-  }
-  main {
-    padding: 4rem 0;
-}
-}
-
-@media (max-width: 639px) {
-  .projects.grid-view {
-      display: flex; /* Switch to flex layout */
-      flex-direction: column; /* Column view */
-  }
+    display: flex;
+    flex-direction: column;
 }
 
 /* Remove old share styles */
@@ -328,13 +306,20 @@ main {
 
 /* Add new share link styles */
 .share-link {
-    color: var(--subtle);
+    color: var(--accent); /* Change from --subtle to --accent */
     display: flex;
     align-items: center;
+    padding: 0.25rem 0.5rem;
+    margin: -0.25rem -0.5rem;
+    border-radius: 0.5rem;
 }
 
-.share-link:hover {
+.share-link:hover,
+.share-link:focus {
     color: var(--text);
+    text-decoration: none !important;
+    outline: none;
+    background: var(--surface);
 }
 
 .share-link svg {
@@ -353,16 +338,13 @@ main {
     bottom: 1rem;
     right: 1rem;
     padding: 0.25rem 0.5rem;
-    background: rgba(0, 0, 0, 0.7);
-    color: white;
-    border: none;
+    background: var(--surface);
+    color: var(--text);
+    border: 1px solid var(--border);
     border-radius: 0.25rem;
     cursor: pointer;
     font-size: 0.75rem;
     font-weight: 500;
-    background: var(--surface);
-    color: var(--text);
-    border: 1px solid var(--border);
 }
 
 .alt-text-button:hover {
@@ -424,4 +406,38 @@ main {
 .projects.grid-view .project-share,
 .projects.grid-view .alt-text-button {
     display: none;
+}
+
+/* Code preview styles */
+pre code {
+    display: block;
+    padding: 1rem;
+    border-radius: 0.5rem;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    position: relative;
+    font-size: 0.875rem;
+}
+
+.copy-button {
+    position: absolute;
+    top: 0.5rem;
+    right: 0.5rem;
+    padding: 0.25rem 0.5rem;
+    background: var(--bg);
+    border: 1px solid var(--border);
+    border-radius: 0.25rem;
+    font-size: 0.75rem;
+    color: var(--text);
+    cursor: pointer;
+    opacity: 0;
+    transition: opacity 0.2s ease;
+}
+
+pre:hover .copy-button {
+    opacity: 1;
+}
+
+.copy-button:hover {
+    background: var(--surface);
 }
