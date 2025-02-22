@@ -1,13 +1,15 @@
 :root {
     --bg: #ffffff;
-    --text: #171717;
-    --subtle: #666666;
-    --accent: #4b5563; /* Gray color for links */
+    --text: #1A2238; /* Deep ink blue-black */
+    --subtle: #2F3542; /* Rich charcoal */
+    --accent: #546A83; /* Muted blue-gray */
+    --text-body: #4A4A4A; /* Warm gray */
+    --card-hover: #FAF7F0; /* Warm off-white */
+    --surface: #F5F5F5; /* Cool off-white */
+    --border: #e5e7eb;
     --accent-deep: #1f2937; /* Deeper, richer gray color for project titles */
     --highlight: #1f2937; /* Much darker gray for focus - was #e5e7eb */
     --highlight-text: #f3f4f6;
-    --surface: #f3f4f6; /* Restore to gray */
-    --border: #e5e7eb;
     --grid-card-height: 250px;
     --card-padding-regular: 2.5rem;
     --card-padding-grid: 2rem;
@@ -19,14 +21,16 @@
 @media (prefers-color-scheme: dark) {
     :root {
         --bg: #171717;
-        --text: #f3f4f6;
+        --text: #F5F7FA;
         --subtle: #9ca3af;
-        --accent: #9ca3af; /* Gray color for links */
+        --accent: #9ca3af;
+        --text-body: #D1D5DB;
+        --card-hover: rgba(31, 29, 20, 0.8);
+        --surface: #1f2937;
+        --border: #374151;
         --accent-deep: #d1d5db; /* Deeper, richer gray color for project titles */
         --highlight: #111827; /* Even darker for dark mode - was #374151 */
         --highlight-text: #f9fafb;
-        --surface: #1f2937; /* Restore to dark gray */
-        --border: #374151;
     }
 }
 
@@ -105,40 +109,25 @@ main {
     grid-template-columns: 280px 1fr;
     gap: 2rem;
     padding: 1.5rem;
-    background: transparent;
-    border: none;
-    outline: none; /* Remove default focus outline */
     position: relative;
     margin: -1.5rem;
-    border-radius: 8px;
-    min-height: 320px; /* Change fixed height to min-height */
-    height: auto; /* Allow content to determine height */
+    align-items: flex-start;
 }
 
+/* Remove hover/focus styles */
 .project:hover,
 .project:focus,
 .project:focus-within {
-    background: rgba(250, 247, 231, 0.8); /* Soft yellow tint */
-    outline: 1px solid rgba(0, 0, 0, 0.05);
-    border-radius: 8px;
-    box-shadow: 0 2px 1px -1px rgba(0, 0, 0, 0.05);
+    background: none;
+    outline: none;
+    box-shadow: none;
 }
 
-/* Remove the bottom line since we're using shadow */
-.project:hover::after,
-.project:focus::after,
-.project:focus-within::after {
-    display: none;
-}
-
-@media (prefers-color-scheme: dark) {
-    .project:hover,
-    .project:focus,
-    .project:focus-within {
-        background: rgba(31, 29, 20, 0.8); /* Warm dark yellow */
-        outline: 1px solid rgba(255, 255, 255, 0.05);
-        box-shadow: 0 2px 1px -1px rgba(255, 255, 255, 0.05);
-    }
+/* Remove the top borders */
+.projects article + article {
+    border-top: none;
+    margin-top: 2rem; /* Reduced from 3rem */
+    padding-top: 0;
 }
 
 .project-header {
@@ -168,14 +157,14 @@ main {
     margin: 0;
     font-weight: 700;
     letter-spacing: -0.01em;
-    color: var(--accent-deep);
+    color: var(--text);
     margin-bottom: 0.5rem; /* Reduced from 0.75rem */
 }
 
 .project-tagline {
     font-size: 1.125rem; /* 18px */
-    color: var(--text);
-    opacity: 0.9;
+    color: var(--subtle);
+    opacity: 0.85;
     margin: 0;
     line-height: 1.5;
     font-weight: 500;
@@ -183,12 +172,12 @@ main {
 }
 
 .project-media {
-    padding-top: 0.75rem; /* Push image down to align with title */
     aspect-ratio: 4/3; /* Change from 1/1 to 4/3 */
     border-radius: 4px;
     overflow: hidden;
     background: var(--surface);
     position: relative;
+    margin-top: 0; /* Remove margin-top */
 }
 
 /* Remove media overlay effects */
@@ -199,7 +188,7 @@ main {
 /* Remove content transform/transition */
 .project-content {
     color: var(--text);
-    padding: 0.5rem 0;
+    padding: 0; /* Remove padding */
 }
 
 .project-title {
@@ -224,8 +213,8 @@ main {
 .project-description {
     font-size: 0.9375rem; /* 15px */
     margin: 0;
-    color: var(--text);
-    opacity: 0.8;
+    color: var(--text-body);
+    opacity: 0.75;
     line-height: 1.8;
     overflow: hidden;
     display: -webkit-box;
@@ -258,17 +247,16 @@ main {
     text-decoration: none;
     font-size: 0.9375rem;
     font-weight: 500;
-    padding: 0.375rem 0.75rem;
+    padding: 0.25rem 0.5rem;
+    margin: -0.25rem -0.5rem;
     border-radius: 0.5rem;
-    background: var(--surface);
-    transition: background 0.2s ease;
 }
 
 .project-links a:hover,
 .project-links a:focus {
-    background: var(--border);
-    text-decoration: none;
+    text-decoration: underline;
     outline: none;
+    background: none;
 }
 
 @media (max-width: 768px) {
