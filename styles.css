@@ -53,6 +53,7 @@ header {
     padding: 8rem 0 6rem;
     text-align: left; /* Left-align the heading */
     padding-left: 40px;
+    min-height: 220px; /* Add fixed height to prevent content jumping */
 }
 
 header h1 {
@@ -61,6 +62,7 @@ header h1 {
     font-weight: 600;
     line-height: 1.2;
     letter-spacing: -0.02em;
+    min-height: 3.6rem; /* Line height * font size */
 }
 
 header p {
@@ -68,6 +70,7 @@ header p {
     font-size: 1.25rem;
     margin: 1.5rem 0 0;
     line-height: 1.5;
+    min-height: 3.75rem; /* Line height * font size * 2 lines */
 }
 
 /* Main content */
@@ -428,4 +431,80 @@ pre:hover .copy-button {
 
 .copy-button:hover {
     background: var(--surface);
+}
+
+.typing-animation {
+    position: relative;
+}
+
+.typing-animation::after {
+    content: '|';
+    position: absolute;
+    animation: finalBlinks 1s linear;
+    opacity: 0;
+}
+
+@keyframes finalBlinks {
+    0%, 25% { opacity: 1; }
+    25%, 50% { opacity: 0; }
+    50%, 100% { opacity: 1; }
+}
+
+.fade-in {
+    opacity: 0;
+    visibility: hidden; /* Hide initially */
+    animation: fadeIn 1.5s ease forwards;
+}
+
+@keyframes fadeIn {
+    from { 
+        opacity: 0;
+        visibility: visible; /* Show during animation */
+    }
+    to { 
+        opacity: 1;
+        visibility: visible;
+    }
+}
+
+.typing-complete::after {
+    display: none;
+}
+
+@keyframes blink {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0; }
+}
+
+.fade-in {
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(10px);
+    animation: fadeInUp 1s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+    animation-delay: 2s; /* Start after typing + blinks */
+}
+
+@keyframes fadeInUp {
+    from { 
+        opacity: 0;
+        visibility: visible;
+        transform: translateY(10px);
+    }
+    to { 
+        opacity: 1;
+        visibility: visible;
+        transform: translateY(0);
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .fade-in {
+        animation: simpleFade 0.5s ease forwards;
+        transform: none;
+    }
+    
+    @keyframes simpleFade {
+        from { opacity: 0; visibility: visible; }
+        to { opacity: 1; visibility: visible; }
+    }
 }

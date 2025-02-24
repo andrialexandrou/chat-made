@@ -1,4 +1,54 @@
 document.addEventListener('DOMContentLoaded', () => {
+    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    
+    const typeText = async (element, text, speed = 50) => {
+        element.textContent = '';
+        if (prefersReducedMotion) {
+            element.textContent = text;
+            element.classList.add('typing-complete');
+            return;
+        }
+
+        for (let char of text) {
+            element.textContent += char;
+            await new Promise(resolve => setTimeout(resolve, speed));
+        }
+        await new Promise(resolve => setTimeout(resolve, 1000)); // Wait for cursor blinks
+        element.classList.add('typing-complete');
+    };
+
+    const title = document.querySelector('h1');
+    const subtitle = document.querySelector('header p');
+    const titleText = title.textContent;
+    const subtitleText = subtitle.textContent;
+
+    // Clear initial text
+    title.textContent = '';
+    subtitle.textContent = '';
+    
+    // Start typing animation sequence
+    const animate = async () => {
+        await typeText(title, titleText, 110); // Even slower typing
+         // Wait for cursor blinks
+        subtitle.classList.add('fade-in'); // Add class after title animation completes
+        subtitle.textContent = subtitleText;
+    };
+    
+    animate();
+
+    // Add animation completion handlers
+    const animatedElements = document.querySelectorAll('.typing-animation');
+    
+    if (prefersReducedMotion) {
+        animatedElements.forEach(el => el.classList.add('typing-complete'));
+    } else {
+        animatedElements.forEach(el => {
+            el.addEventListener('animationend', () => {
+                el.classList.add('typing-complete');
+            });
+        });
+    }
+
     const projectsContainer = document.getElementById('projects');
     const viewToggles = document.querySelectorAll('.view-toggle');
 
