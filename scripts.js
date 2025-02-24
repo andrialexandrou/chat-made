@@ -13,7 +13,6 @@ document.addEventListener('DOMContentLoaded', () => {
             element.textContent += char;
             await new Promise(resolve => setTimeout(resolve, speed));
         }
-        await new Promise(resolve => setTimeout(resolve, 1000)); // Wait for cursor blinks
         element.classList.add('typing-complete');
     };
 
@@ -29,7 +28,6 @@ document.addEventListener('DOMContentLoaded', () => {
     // Start typing animation sequence
     const animate = async () => {
         await typeText(title, titleText, 110); // Even slower typing
-         // Wait for cursor blinks
         subtitle.classList.add('fade-in'); // Add class after title animation completes
         subtitle.textContent = subtitleText;
     };

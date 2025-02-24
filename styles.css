@@ -2,7 +2,7 @@
     --bg: #ffffff;
     --text: #1A2238; /* Deep ink blue-black */
     --subtle: #2F3542; /* Rich charcoal */
-    --accent: #546A83; /* Muted blue-gray */
+    --accent: #D85E33; /* Warm rust orange */
     --text-body: #4A4A4A; /* Warm gray */
     --card-hover: #FAF7F0; /* Warm off-white */
     --surface: #F5F5F5; /* Cool off-white */
@@ -23,7 +23,7 @@
         --bg: #171717;
         --text: #F5F7FA;
         --subtle: #9ca3af;
-        --accent: #9ca3af;
+        --accent: #E67E59; /* Lighter rust orange for dark mode */
         --text-body: #D1D5DB;
         --card-hover: rgba(31, 29, 20, 0.8);
         --surface: #1f2937;
@@ -178,9 +178,10 @@ main {
     aspect-ratio: 4/3; /* Change from 1/1 to 4/3 */
     border-radius: 4px;
     overflow: hidden;
-    background: var(--surface);
+    /* background: var(--surface); */
     position: relative;
     margin-top: 0; /* Remove margin-top */
+    padding-top: 10px;
 }
 
 /* Remove media overlay effects */
@@ -253,11 +254,14 @@ main {
     padding: 0.25rem 0.5rem;
     margin: -0.25rem -0.5rem;
     border-radius: 0.5rem;
+    text-underline-offset: 2px;
+    text-decoration-thickness: 3px;
 }
 
 .project-links a:hover,
 .project-links a:focus {
     text-decoration: underline;
+    text-decoration-thickness: 3px;
     outline: none;
     background: none;
 }
