@@ -96,19 +96,50 @@ document.addEventListener('DOMContentLoaded', () => {
     const projects = [
         {
             date: "2025-02-18",
-            title: "Chat Made webiste",
-            tagline: "You're looking at it",
-            status: "draft",
+            title: "Chat Made",
+            tagline: "Portfolio of AI-built projects",
             media: {
                 type: "img",
                 src: "./assets/chat-made.png",
                 alt: `A portfolio-style webpage showing five project cards arranged in a grid layout with a white background. Each card displays a project title, date, and brief description, with dates ranging from December 2024 to February 2025. Projects include "Gus the Writing Assistant" (an Obsidian plugin), "WordCount.js" (a Google Sheets tool), "Commander Tracker" (a Magic the Gathering tool), "Custom agent for accessibility-focused code review," and "AI Image Description" (an Alfred workflow). The page header reads "Chat, I have an idea" with a subtitle explaining these are LLM-based projects. Each card has a subtle shadow effect and contains truncated descriptions of the project purposes.`
             },
-            description: "Simple portfolio site. Cute. Gets to the point.",
+            description: "You're looking at it. A simple portfolio site for projects built primarily with LLMs. Features a typing animation, expand/collapse project details, and responsive layout.",
             links: [
                 { href: "https://github.com/andrialexandrou/chat-made", text: "Repository" }
             ],
             builtWith: "Claude and Copilot Edits"
+        },
+        {
+            date: "2026-02-25",
+            title: "HubberHub",
+            tagline: "GitHub notifications triage app for macOS",
+            media: {
+                type: "img",
+                src: "./assets/hubberhub.png",
+                alt: `A macOS desktop application window titled "HubberHub" showing a GitHub notifications triage interface. The window has a clean white background with a "Mark all as read" button in red at the top right. Notifications are organized into three sections: "ACTION NEEDED" with 2 items showing pull requests with blue left borders and merged badges, "STATE CHANGES" with 2 items showing closed and merged PRs with a "Clear section" button, and "EVERYTHING ELSE" with 2 open PRs. Each notification shows the source (Copilot or username), title, repository, status badge (merged/closed/open), time ago, and context about why it appears. The app sits on a desktop with a scenic ocean cliff wallpaper visible behind it.`
+            },
+            description: `<p>A macOS menu bar app for triaging GitHub notifications. Uses a hybrid classification system: deterministic rules handle clear-cut cases, while GPT-4o-mini via the GitHub Models API handles notifications that need nuanced judgment.</p>
+            <p>Notifications are sorted into Action Needed, State Changes, and Everything Else. Includes desktop notifications, power-aware refresh, one-click mark-as-done, and light/dark theme support.</p>
+            <p>Built with Electron and React, installed to /Applications. Background polling every 5 minutes with a caching layer so it feels instant.</p>`,
+            links: [],
+            builtWith: "Claude via Copilot CLI"
+        },
+        {
+            date: "2026-03-09",
+            title: "Stage PR",
+            tagline: "Copilot CLI skill for spinning up PR preview environments",
+            media: {
+                type: "img",
+                src: "./assets/stage-pr.png",
+                alt: `A terminal window showing the Copilot CLI running the stage-pr skill. The output shows a completed PR staging workflow: feature flags enabled, elapsed time computed (10 min 43 sec), and a "Preview environment ready!" message. Below that are instructions to sign in at a codespace URL, enter "monalisa" as the username, then validate by navigating to a commit comment and checking for a "Copy Markdown" button in the comment action menu. The terminal has a dark blue background with the Copilot CLI prompt visible at the bottom showing "Claude Opus 4.6 (3x) (high)" as the active model.`
+            },
+            description: `<p>A custom skill for GitHub Copilot CLI that spins up codespace-based preview environments for pull requests. Say "stage this PR" and it creates a codespace, checks out the branch, starts the dev server, and gives you a clickable URL to validate the change in your browser.</p>
+            <p>Handles the full complexity of GitHub's internal monorepo (github/github) and UI repo (github/github-ui) — auto-detecting which environment to use, enabling feature flags, and monitoring server readiness with HTTP polling.</p>
+            <p>Part of the github/agent-skills repository, a collection of Copilot CLI skills built by Hubbers for Hubbers.</p>`,
+            links: [
+                { href: "https://github.github.io/agent-skills/", text: "Skill Catalog" }
+            ],
+            builtWith: "Claude via Copilot CLI"
         },
         {
             date: "2024-11-20",
