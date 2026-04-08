@@ -27,7 +27,7 @@ document.addEventListener('DOMContentLoaded', () => {
     
     // Start typing animation sequence
     const animate = async () => {
-        await typeText(title, titleText, 110); // Even slower typing
+        await typeText(title, titleText, 55); // Snappy typing
         subtitle.classList.add('fade-in'); // Add class after title animation completes
         subtitle.textContent = subtitleText;
     };
@@ -277,39 +277,40 @@ document.addEventListener('DOMContentLoaded', () => {
         const projectSlug = slugify(project.title);
         projectCard.id = projectSlug;
 
-        const altTextButton = project.media.type === 'img' ? `
-            <button class="alt-text-button" aria-label="Show image description">ALT</button>
-            <dialog class="alt-text-dialog">
-                <div class="dialog-content">
-                    ${project.media.alt}
-                    <button class="dialog-close" aria-label="Close dialog">×</button>
-                </div>
-            </dialog>
-        ` : '';
+        const dateFormatted = new Date(project.date + (project.date.length <= 7 ? '-01' : '')).toLocaleDateString('en-US', { year: 'numeric', month: 'short' });
 
         projectCard.innerHTML = `
-            <div class="project-media">
-                ${project.media.type === 'img' ? 
-                    `<img src="${project.media.src}" alt="${project.media.alt}">
-                     ${altTextButton}` : 
-                    `<video controls><source src="${project.media.src}" type="video/mp4">${project.media.alt}</video>`}
+            <div class="project-header">
+                <div class="project-line">
+                    <button class="expand-toggle" aria-expanded="false" aria-label="Expand ${project.title}">▶</button>
+                    <h2 class="project-title">${project.title}</h2><span class="project-tagline">${project.tagline}</span>
+                    <span class="project-links">
+                        ${project.links.map(link => `<a href="${link.href}">${link.text}</a>`).join('')}
+                    </span>
+                </div>
             </div>
-            <div class="project-content">
-                <h2 class="project-title">${project.title}</h2>
-                <p class="project-tagline">${project.tagline}</p>
-                <div class="project-links">
-                    ${project.links.map(link => `<a href="${link.href}">${link.text}</a>`).join('')}
-                    <a href="#${projectSlug}" class="share-link" aria-label="Share link to ${project.title}">
-                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                            <path d="M4 12v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8"></path>
-                            <polyline points="16 6 12 2 8 6"></polyline>
-                            <line x1="12" y1="2" x2="12" y2="15"></line>
-                        </svg>
-                    </a>
+            <div class="project-detail">
+                <figure class="project-media">
+                    ${project.media.type === 'img' ? 
+                        `<div class="img-wrapper">
+                             <img src="${project.media.src}" alt="${project.media.alt}">
+                             <button class="alt-text-button" aria-label="Show image description">ALT</button>
+                         </div>
+                         <dialog class="alt-text-dialog">
+                             <div class="dialog-content">
+                                 ${project.media.alt}
+                                 <button class="dialog-close" aria-label="Close dialog">×</button>
+                             </div>
+                         </dialog>` : 
+                        `<video controls><source src="${project.media.src}" type="video/mp4">${project.media.alt}</video>`}
+                </figure>
+                <div class="project-detail-text">
+                    <p class="project-meta">${dateFormatted} · Built with ${project.builtWith}</p>
+                    <div class="project-description">
+                        ${project.description}
+                    </div>
                 </div>
-                <div class="project-description">
-                    ${project.description}
-                </div>
+            </div>
             </div>
         `;
 
@@ -326,43 +327,28 @@ document.addEventListener('DOMContentLoaded', () => {
             block.parentNode.appendChild(button);
         });
 
-        // Add click handler for alt text button
-        if (project.media.type === 'img') {
-            const altButton = projectCard.querySelector('.alt-text-button');
-            const altDialog = projectCard.querySelector('.alt-text-dialog');
-            const closeButton = projectCard.querySelector('.dialog-close');
-            
-            altButton.addEventListener('click', () => {
-                altDialog.showModal();
+        // Add expand toggle
+        const expandToggle = projectCard.querySelector('.expand-toggle');
+        if (expandToggle) {
+            expandToggle.addEventListener('click', () => {
+                const isExpanded = projectCard.classList.toggle('expanded');
+                expandToggle.setAttribute('aria-expanded', isExpanded);
+                expandToggle.textContent = isExpanded ? '▼' : '▶';
             });
+        }
 
-            // Close dialog and return focus
-            const closeDialog = () => {
-                altDialog.close();
-                altButton.focus();
-            };
-
-            // Close on button click
+        // Add ALT text dialog handler
+        const altButton = projectCard.querySelector('.alt-text-button');
+        const altDialog = projectCard.querySelector('.alt-text-dialog');
+        if (altButton && altDialog) {
+            const closeButton = altDialog.querySelector('.dialog-close');
+            altButton.addEventListener('click', () => altDialog.showModal());
+            const closeDialog = () => { altDialog.close(); altButton.focus(); };
             closeButton.addEventListener('click', closeDialog);
-
-            // Close on Escape key
-            altDialog.addEventListener('keydown', (e) => {
-                if (e.key === 'Escape') {
-                    closeDialog();
-                }
-            });
-
-            // Close on click outside
+            altDialog.addEventListener('keydown', (e) => { if (e.key === 'Escape') closeDialog(); });
             altDialog.addEventListener('click', (e) => {
-                const dialogDimensions = altDialog.getBoundingClientRect();
-                if (
-                    e.clientX < dialogDimensions.left ||
-                    e.clientX > dialogDimensions.right ||
-                    e.clientY < dialogDimensions.top ||
-                    e.clientY > dialogDimensions.bottom
-                ) {
-                    closeDialog();
-                }
+                const r = altDialog.getBoundingClientRect();
+                if (e.clientX < r.left || e.clientX > r.right || e.clientY < r.top || e.clientY > r.bottom) closeDialog();
             });
         }
 
