@@ -121,7 +121,9 @@ document.addEventListener('DOMContentLoaded', () => {
             description: `<p>A macOS menu bar app for triaging GitHub notifications. Uses a hybrid classification system: deterministic rules handle clear-cut cases, while GPT-4o-mini via the GitHub Models API handles notifications that need nuanced judgment.</p>
             <p>Notifications are sorted into Action Needed, State Changes, and Everything Else. Includes desktop notifications, power-aware refresh, one-click mark-as-done, and light/dark theme support.</p>
             <p>Built with Electron and React, installed to /Applications. Background polling every 5 minutes with a caching layer so it feels instant.</p>`,
-            links: [],
+            links: [
+                { href: "https://github.com/andrialexandrou/hubberhub", text: "Repository" }
+            ],
             builtWith: "Claude via Copilot CLI"
         },
         {
